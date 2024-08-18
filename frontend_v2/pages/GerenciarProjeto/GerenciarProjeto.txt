@@ -1,0 +1,163 @@
+<template>
+    <div class="gerenciar-projeto" v-if="project">
+      <div class="header">
+        <div class="capa-projeto">
+          <img :src="project?.capaUrl || 'default-capa-url.png'" alt="Capa do Projeto" />
+        </div>
+        <div class="info">
+          <div class="nome-projeto">{{ project?.nome || 'Nome do Projeto' }}</div>
+          <div class="data-requisicao">
+            Solicitado em: {{ formatDate(project?.dataSolicitacao) || 'Data de Solicitação' }}
+          </div>
+          <div class="solicitante">Solicitante: {{ project?.solicitante || 'Solicitante' }}</div>
+          <div class="responsavel">Responsável: {{ project?.responsavel || 'Responsável' }}</div>
+        </div>
+        <div class="tempo-restante">
+          <i class="bi bi-calendar"></i>
+          {{ calcularTempoRestante(project?.dataEntrega) || 'Tempo Restante' }}
+        </div>
+      </div>
+      <div class="periodo">
+        De {{ formatDate(project?.dataInicio) || 'Data de Início' }} a {{ formatDate(project?.dataEntrega) || 'Data de Entrega' }}
+      </div>
+      <div class="tabs">
+        <button :class="{ active: activeTab === 'tarefas' }" @click="activeTab = 'tarefas'">Tarefas</button>
+        <button :class="{ active: activeTab === 'descricao' }" @click="activeTab = 'descricao'">Descrição</button>
+      </div>
+      <div class="tab-content">
+        <div v-if="activeTab === 'tarefas'">
+          <!-- Conteúdo da aba Tarefas -->
+          <p>Conteúdo da aba Tarefas</p>
+        </div>
+        <div v-if="activeTab === 'descricao'">
+          <!-- Conteúdo da aba Descrição -->
+          <p>Conteúdo da aba Descrição</p>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
+  
+  // Função para formatar a data
+  function formatDate(date) {
+    if (!date) return null;
+    const d = new Date(date);
+    const utcDay = String(d.getUTCDate()).padStart(2, '0');
+    const utcMonth = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const utcYear = d.getUTCFullYear();
+    return `${utcDay}/${utcMonth}/${utcYear}`;
+  }
+  
+  // Função para calcular o tempo restante
+  function calcularTempoRestante(dataEntrega) {
+    if (!dataEntrega) return null;
+    const hoje = new Date();
+    const entrega = new Date(dataEntrega);
+    const diff = entrega - hoje;
+  
+    const anos = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+    const meses = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+    const dias = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+  
+    return `${dias} dias, ${meses} meses e ${anos} anos restantes`;
+  }
+  
+  const activeTab = ref('tarefas');
+  const project = ref(null);
+  const route = useRoute();
+  
+  onMounted(async () => {
+    const projectId = route.params.id;
+    try {
+      const { data, error } = await useFetch(`http://localhost:8081/projetos/${projectId}`);
+      if (error.value) {
+        console.error('Error fetching project:', error.value);
+      } else {
+        project.value = data.value;
+      }
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  });
+  </script>
+  
+  <style scoped>
+  .gerenciar-projeto {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .capa-projeto {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  .capa-projeto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .info {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .nome-projeto {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .data-requisicao, .solicitante, .responsavel {
+    font-size: 12px;
+  }
+  
+  .tempo-restante {
+    font-size: 14px;
+    text-align: right;
+  }
+  
+  .periodo {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .tabs button {
+    padding: 10px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+  }
+  
+  .tabs .active {
+    background: #007bff;
+    color: white;
+  }
+  
+  .tab-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  </style>
+  
