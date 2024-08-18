@@ -34,5 +34,7 @@ COPY . .
 # Expose the port that the application listens on.
 EXPOSE 8081
 
+RUN npm install
+
 # Run the application.
 CMD npm run start

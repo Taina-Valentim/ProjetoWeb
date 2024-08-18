@@ -68,5 +68,7 @@ COPY --from=build /usr/src/app/.output/server/index.mjs ./.output/server/index.m
 # Expose the port that the application listens on.
 EXPOSE 3000
 
+RUN npm install
+
 # Run the application.
 CMD npm run start
