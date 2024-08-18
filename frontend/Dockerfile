@@ -42,6 +42,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 # Copy the rest of the source files into the image.
 COPY . .
+
+RUN npm install
+
 # Run the build script.
 RUN npm run build
 
@@ -67,8 +70,6 @@ COPY --from=build /usr/src/app/.output/server/index.mjs ./.output/server/index.m
 
 # Expose the port that the application listens on.
 EXPOSE 3000
-
-RUN npm install
 
 # Run the application.
 CMD npm run start
