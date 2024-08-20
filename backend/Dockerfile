@@ -13,11 +13,11 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
-
+COPY . .
 USER root
 RUN npm install
 USER node
 
-COPY . .
+
 EXPOSE 8081
 CMD npm run start
