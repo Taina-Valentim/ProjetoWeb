@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   backend:
+    image: backend_img:latest
     build: ./backend
     container_name: backend
     ports:
@@ -9,7 +10,12 @@ services:
       - ./backend:/app
     environment:
       - NODE_ENV=production
+    deploy:
+      replicas: 3
+      restart_policy:
+            condition: on-failure
   frontend:
+    image: frontend_img:latest
     build: ./frontend
     container_name: frontend
     ports:
@@ -18,3 +24,18 @@ services:
       - backend
     environment:
       - VUE_APP_API_URL=http://backend:8081
+    deploy:
+      replicas: 3
+      restart_policy:
+            condition: on-failure
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
