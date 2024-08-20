@@ -26,7 +26,7 @@
       const apiUrl = config.public.apiUrl;
 
       console.log('API URL:', apiUrl); // Exibe o valor da variável de ambiente
-      const { data, error } = await useFetch(`${apiUrl}/projetos`);
+      const { data, error } = await useFetch(`http://backend:8081/projetos`);
       if (error.value) {
         console.error('Error fetching projects:', error.value);
       } else {
