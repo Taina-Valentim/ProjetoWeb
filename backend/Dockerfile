@@ -19,6 +19,7 @@ COPY . .
 USER root
 RUN npm install
 RUN npm rebuild sqlite3
+RUN mkdir -p /usr/src/app/database && chown -R node:node /usr/src/app/database
 USER node
 
 

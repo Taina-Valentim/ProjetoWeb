@@ -1,12 +1,12 @@
 {
   "development": {
-    "storage": "C:\\Users\\tatah\\Documents\\ProjetoTarefas_Gerenciador\\backend\\database.sqlite",
+    "storage": "./database_dev.sqlite",
     "dialect": "sqlite"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "./database_test.sqlite",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
