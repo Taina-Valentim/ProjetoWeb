@@ -21,7 +21,7 @@
   
   onMounted(async () => {
     try {
-      const { data, error } = await useFetch('http://backend:8081/projetos');
+      const { data, error } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/projetos`);
       if (error.value) {
         console.error('Error fetching projects:', error.value);
       } else {

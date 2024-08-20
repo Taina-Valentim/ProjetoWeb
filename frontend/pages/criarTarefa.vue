@@ -100,7 +100,7 @@ const criarTarefa = async () => {
     };
 
     try {
-        const response = await useFetch('http://backend:8081/tarefas', {
+        const response = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/tarefas`, {
             method: 'POST',
             body: JSON.stringify(novaTarefa),
             headers: {

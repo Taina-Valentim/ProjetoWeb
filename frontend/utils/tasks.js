@@ -11,7 +11,7 @@ export async function fetchTasks(projectId) {
   if (!projectId) return;
 
   try {
-    const { data, error } = await useFetch(`http://backend:8081/projetos/${projectId}/tarefas`);
+    const { data, error } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/projetos/${projectId}/tarefas`);
 
     if (error.value) {
       console.error('Error fetching tasks:', error.value);

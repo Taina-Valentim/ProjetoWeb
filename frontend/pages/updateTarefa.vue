@@ -54,7 +54,7 @@
   
   // Busca os dados do projeto ao carregar a página
   onMounted(async () => {
-    const { data, error } = await useFetch(`http://backend:8081/projetos/${projectId}`);
+    const { data, error } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/projetos/${projectId}`);
     
     if (error.value) {
       console.error('Erro ao carregar o projeto:', error.value);
@@ -66,7 +66,7 @@
   
   async function atualizarProjeto() {
     try {
-      const { error } = await useFetch(`http://backend:8081/projetos/${projectId}`, {
+      const { error } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/projetos/${projectId}`, {
         method: 'PUT',
         body: JSON.stringify(project.value),
         headers: {
@@ -87,7 +87,7 @@
   
   async function deletarProjeto() {
     try {
-      const { error } = await useFetch(`http://backend:8081/projetos/${projectId}`, {
+      const { error } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/projetos/${projectId}`, {
         method: 'DELETE'
       });
   

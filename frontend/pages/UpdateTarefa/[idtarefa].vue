@@ -81,7 +81,7 @@ const etapa = ref(1); // Controle de etapa
 // Carregar dados da tarefa existente
 onMounted(async () => {
   try {
-    const { data } = await useFetch(`http://backend:8081/tarefas/${taskId}`);
+    const { data } = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/tarefas/${taskId}`);
     task.value = data.value;
   } catch (err) {
     console.error('Erro ao carregar a tarefa:', err);
@@ -91,7 +91,7 @@ onMounted(async () => {
 // Atualizar tarefa
 const atualizarTarefa = async () => {
   try {
-    const response = await useFetch(`http://backend:8081/tarefas/${taskId}`, {
+    const response = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/tarefas/${taskId}`, {
       method: 'PUT',
       body: JSON.stringify(task.value),
       headers: {
@@ -113,7 +113,7 @@ const atualizarTarefa = async () => {
 // Excluir tarefa
 const excluirTarefa = async () => {
   try {
-    const response = await useFetch(`http://backend:8081/tarefas/${taskId}`, {
+    const response = await useFetch(`http://${process.env.VUE_APP_API_URL}:8081/tarefas/${taskId}`, {
       method: 'DELETE'
     });
 
