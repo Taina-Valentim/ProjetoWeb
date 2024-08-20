@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prod": "node ./server/index.mjs",
+    "prod": "node ./.output//server/index.mjs",
     "start": "nuxt start",
     "build": "nuxt build",
     "dev": "nuxt dev",
