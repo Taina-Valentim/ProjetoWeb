@@ -22,7 +22,10 @@
   
   onMounted(async () => {
     try {
-      const apiUrl = process.env.VUE_APP_API_URL;
+      const config = useRuntimeConfig();
+      const apiUrl = config.public.apiUrl;
+
+      console.log('API URL:', apiUrl); // Exibe o valor da variável de ambiente
       const { data, error } = await useFetch(`${apiUrl}/projetos`);
       if (error.value) {
         console.error('Error fetching projects:', error.value);
