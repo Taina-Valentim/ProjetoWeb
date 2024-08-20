@@ -16,8 +16,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 USER root
 RUN npm install
-USER node
 RUN npm rebuild sqlite3
+USER node
+
 
 EXPOSE 8081
 CMD npm run start
