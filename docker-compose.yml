@@ -17,4 +17,4 @@ services:
     depends_on:
       - backend
     environment:
-      - VUE_APP_API_URL=http://backend
+      - VUE_APP_API_URL=http://backend:8081
