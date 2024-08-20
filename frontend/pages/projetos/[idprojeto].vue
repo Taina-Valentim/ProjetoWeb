@@ -123,7 +123,7 @@ function calcularTempoRestante(dataEntrega) {
 
 onMounted(async () => {
   try {
-    const { data, error } = await useFetch(`http://localhost:8081/projetos/${id.value}`);
+    const { data, error } = await useFetch(`http://backend:8081/projetos/${id.value}`);
     if (error.value) {
       console.error('Error fetching project:', error.value);
     } else {

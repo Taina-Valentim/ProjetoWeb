@@ -142,7 +142,7 @@ const criarProjeto = async () => {
         capaUrl: capaUrl.value,
     };
 
-    const response = await useFetch('http://localhost:8081/projetos', {
+    const response = await useFetch('http://backend:8081/projetos', {
         method: 'POST',
         body: JSON.stringify(novoProjeto),
         headers: {

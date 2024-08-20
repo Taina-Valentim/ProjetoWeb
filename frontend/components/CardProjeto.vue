@@ -48,7 +48,7 @@ async function fetchTasks() {
   if (!props.project?.id) return;
 
   try {
-    const { data, error } = await useFetch(`http://localhost:8081/projetos/${props.project.id}/tarefas`);
+    const { data, error } = await useFetch(`http://backend:8081/projetos/${props.project.id}/tarefas`);
 
     if (error.value) {
       console.error('Error fetching tasks:', error.value);

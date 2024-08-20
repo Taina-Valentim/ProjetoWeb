@@ -82,7 +82,7 @@ async function fetchTasks() {
   if (!project.value?.id) return;
 
   try {
-    const { data, error } = await useFetch(`http://localhost:8081/projetos/${project.value.id}/tarefas`);
+    const { data, error } = await useFetch(`http://backend:8081/projetos/${project.value.id}/tarefas`);
 
     if (error.value) {
       console.error('Error fetching tasks:', error.value);
@@ -123,7 +123,7 @@ function calcularTempoRestante(dataEntrega) {
 
 onMounted(async () => {
   try {
-    const { data, error } = await useFetch(`http://localhost:8081/projetos/${id.value}`);
+    const { data, error } = await useFetch(`http://backend:8081/projetos/${id.value}`);
     if (error.value) {
       console.error('Error fetching project:', error.value);
     } else {

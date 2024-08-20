@@ -72,7 +72,7 @@
   onMounted(async () => {
     const projectId = route.params.id;
     try {
-      const { data, error } = await useFetch(`http://localhost:8081/projetos/${projectId}`);
+      const { data, error } = await useFetch(`http://backend:8081/projetos/${projectId}`);
       if (error.value) {
         console.error('Error fetching project:', error.value);
       } else {

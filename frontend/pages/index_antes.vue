@@ -29,7 +29,7 @@
 <script setup>
     import { ref } from 'vue';
 
-    const response = await useFetch("http://localhost:8081/projetos");
+    const response = await useFetch("http://backend:8081/projetos");
     const listaProjetos = ref(response.data);
 
     console.log(listaProjetos.value);
