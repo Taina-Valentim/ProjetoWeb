@@ -17,7 +17,7 @@ COPY . .
 USER root
 RUN npm install
 USER node
-
+RUN npm rebuild sqlite3
 
 EXPOSE 8081
 CMD npm run start
