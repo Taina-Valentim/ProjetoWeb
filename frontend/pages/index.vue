@@ -14,7 +14,7 @@
   </template>
   
   <script setup>
-  const apiUrl = process.env.VUE_APP_API_URL;
+  
   import { ref, onMounted } from 'vue';
   import ListaProjetos from '~/components/ListaProjetos.vue';
   
@@ -22,6 +22,7 @@
   
   onMounted(async () => {
     try {
+      const apiUrl = process.env.VUE_APP_API_URL;
       const { data, error } = await useFetch(`${apiUrl}/projetos`);
       if (error.value) {
         console.error('Error fetching projects:', error.value);
