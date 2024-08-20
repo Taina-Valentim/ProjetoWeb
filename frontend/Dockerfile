@@ -27,4 +27,4 @@ COPY package.json .
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/.output ./.output
 EXPOSE 3000
-CMD npm run start
+CMD npm run prod
