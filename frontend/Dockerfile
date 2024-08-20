@@ -47,7 +47,7 @@ RUN npm install
 
 # Run the build script.
 RUN npm run build
-
+RUN nuxi build
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
 # where the necessary files are copied from the build stage.
